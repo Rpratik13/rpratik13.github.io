@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/resume',
+  basePath: '/',
   output: 'export',
   typescript: {
     ignoreBuildErrors: true,
