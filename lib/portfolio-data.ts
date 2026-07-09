@@ -5,8 +5,8 @@ export const profile = {
   email: 'r.pratik013@gmail.com',
   tagline:
     'I build scalable, distributed systems and craft delightful product experiences end to end, from database schema to pixel.',
-  resumeUrl: '/Resume - Pratik Rajbhandari.pdf',
-  avatarUrl: '/images/profile.jpeg',
+  resumeUrl: '/resume/Resume - Pratik Rajbhandari.pdf',
+  avatarUrl: '/resume/images/profile.jpeg',
   socials: {
     github: 'https://github.com/Rpratik13',
     linkedin: 'https://linkedin.com/in/pratik-rajbhandari',
