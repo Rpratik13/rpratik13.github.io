@@ -51,6 +51,7 @@
     "@types/react-dom": "$@types/react-dom",
     "hono": "4.12.25"
   },
+  "packageManager": "pnpm@10.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
