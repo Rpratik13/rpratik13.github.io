@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@vercel/analytics": "2.0.1",
@@ -40,6 +39,12 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.63.0"
   },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "pnpm prettify",
+      "pnpm lint"
+    ]
+  },
   "name": "my-project",
   "overrides": {
     "@types/react": "$@types/react",
@@ -47,12 +52,6 @@
     "hono": "4.12.25"
   },
   "private": true,
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
-      "pnpm prettify",
-      "pnpm lint"
-    ]
-  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -63,5 +62,6 @@
     "start": "next start",
     "ts-check": "tsc --noEmit --project ."
   },
+  "type": "module",
   "version": "0.1.0"
 }
