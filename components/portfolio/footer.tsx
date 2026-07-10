@@ -20,11 +20,10 @@ export function Footer() {
             Let&apos;s build together
           </span>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight md:text-5xl">
-            Have a project in mind?
+            Ready for a new opportunity.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground">
-            I&apos;m always open to discussing new opportunities, ambitious
-            ideas, or just talking shop about distributed systems.
+            I&apos;m currently looking to join a high-impact engineering team full-time. If you&apos;re hiring, have an open role, or just want to talk shop about distributed systems, I&apos;d love to chat.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

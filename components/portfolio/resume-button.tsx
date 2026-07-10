@@ -1,8 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { Download, Loader2, Check } from 'lucide-react';
-import { generateResume } from '@/lib/generate-resume';
+import { Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { profile } from '@/lib/portfolio-data';
 
