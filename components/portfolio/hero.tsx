@@ -1,49 +1,57 @@
 import Image from 'next/image';
-import { MapPin, ArrowDown } from 'lucide-react';
+import { ArrowDown, MapPin } from 'lucide-react';
+
 import { profile } from '@/lib/portfolio-data';
+
 import { SocialLinks } from './social-links';
 import { ResumeButton } from './resume-button';
 
-export function Hero() {
+export function Hero(): React.ReactElement {
   return (
     <section
+      className="relative overflow-hidden px-5 pt-32 pb-20 md:px-8 md:pt-40"
       id="top"
-      className="relative overflow-hidden px-5 pb-20 pt-32 md:px-8 md:pt-40"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
         <Image
-          src="/images/hero-bg.png"
           alt=""
+          className="object-cover opacity-40"
           fill
           priority
-          className="object-cover opacity-40"
+          src="/images/hero-bg.png"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-background/70 via-background/85 to-background" />
-        <div className="absolute inset-0 grid-glow" />
-        <div className="absolute -top-32 left-1/2 h-144 w-xl -translate-x-1/2 rounded-full bg-primary/15 blur-3xl animate-float-blob" />
-        <div className="absolute right-0 top-40 h-72 w-72 rounded-full bg-chart-2/10 blur-3xl animate-float-blob [animation-delay:-6s]" />
+
+        <div className="from-background/70 via-background/85 to-background absolute inset-0 bg-linear-to-b" />
+
+        <div className="grid-glow absolute inset-0" />
+
+        <div className="bg-primary/15 animate-float-blob absolute -top-32 left-1/2 h-144 w-xl -translate-x-1/2 rounded-full blur-3xl" />
+
+        <div className="bg-chart-2/10 animate-float-blob absolute top-40 right-0 h-72 w-72 rounded-full blur-3xl [animation-delay:-6s]" />
       </div>
 
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-sm text-muted-foreground backdrop-blur-sm">
+          <div className="border-border bg-card/60 text-muted-foreground inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-primary" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              <span className="animate-pulse-dot bg-primary absolute inline-flex h-full w-full rounded-full" />
+
+              <span className="bg-primary relative inline-flex h-2 w-2 rounded-full" />
             </span>
             Available for new opportunities
           </div>
 
-          <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-5xl">
+          <h1 className="mt-6 text-4xl leading-[1.05] font-bold tracking-tight text-balance sm:text-6xl md:text-5xl">
             Hi, I&apos;m{' '}
-            <span className="relative whitespace-nowrap text-primary">
+            <span className="text-primary relative whitespace-nowrap">
               {profile.name}
+
               <span
                 aria-hidden="true"
-                className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-primary/40"
+                className="bg-primary/40 absolute -bottom-1 left-0 h-1 w-full rounded-full"
               />
             </span>
             .
@@ -51,64 +59,71 @@ export function Hero() {
             <span className="text-foreground">{profile.role}.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="text-muted-foreground mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
             {profile.tagline}
           </p>
 
-          <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4 text-primary" />
+          <div className="text-muted-foreground mt-5 flex items-center gap-2 text-sm">
+            <MapPin className="text-primary h-4 w-4" />
+
             {profile.location}
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <ResumeButton />
+
             <a
+              className="border-border text-foreground hover:border-primary/60 hover:text-primary inline-flex items-center gap-2 rounded-xl border px-6 py-3 font-medium transition-all hover:-translate-y-0.5"
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-xl border border-border px-6 py-3 font-medium text-foreground transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:text-primary"
             >
               View Projects
             </a>
+
             <SocialLinks className="flex items-center gap-2" />
           </div>
         </div>
 
-        {/* Profile picture */}
         <div className="relative mx-auto w-full max-w-sm">
           <div
-            className="absolute -inset-4 rounded-[2rem] bg-primary/10 blur-2xl"
             aria-hidden="true"
+            className="bg-primary/10 absolute -inset-4 rounded-[2rem] blur-2xl"
           />
-          <div className="group relative aspect-square overflow-hidden rounded-[1.75rem] border border-primary/30 bg-card shadow-[0_30px_80px_-40px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-all duration-500 hover:border-primary/60">
+          <div className="group border-primary/30 bg-card hover:border-primary/60 relative aspect-square overflow-hidden rounded-[1.75rem] border shadow-[0_30px_80px_-40px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-all duration-500">
             <Image
-              src={profile.avatarUrl}
               alt={`Portrait of ${profile.name}`}
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
               fill
               priority
               sizes="(max-width: 1024px) 20rem, 24rem"
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              src={profile.avatarUrl}
             />
-            <div className="absolute inset-0 bg-linear-to-t from-background/60 via-transparent to-transparent" />
+
+            <div className="from-background/60 absolute inset-0 bg-linear-to-t via-transparent to-transparent" />
           </div>
         </div>
       </div>
 
       <dl className="mx-auto mt-16 grid max-w-6xl grid-cols-3 gap-4 sm:max-w-xl">
-        {profile.stats.map((s) => (
-          <div
-            key={s.label}
-            className="rounded-xl border border-border bg-card/50 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-card hover:shadow-[0_16px_50px_-24px_color-mix(in_oklch,var(--primary)_70%,transparent)]"
-          >
-            <dt className="sr-only">{s.label}</dt>
-            <dd className="text-2xl font-bold text-primary md:text-3xl">
-              {s.value}
-            </dd>
-            <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
-          </div>
-        ))}
+        {profile.stats.map((s) => {
+          return (
+            <div
+              className="border-border bg-card/50 hover:border-primary/50 hover:bg-card rounded-xl border p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_50px_-24px_color-mix(in_oklch,var(--primary)_70%,transparent)]"
+              key={s.label}
+            >
+              <dt className="sr-only">{s.label}</dt>
+
+              <dd className="text-primary text-2xl font-bold md:text-3xl">
+                {s.value}
+              </dd>
+
+              <p className="text-muted-foreground mt-1 text-xs">{s.label}</p>
+            </div>
+          );
+        })}
       </dl>
 
-      <div className="mx-auto mt-16 flex max-w-6xl items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-        <ArrowDown className="h-4 w-4 animate-bounce text-primary" />
+      <div className="text-muted-foreground mx-auto mt-16 flex max-w-6xl items-center gap-2 text-xs tracking-[0.2em] uppercase">
+        <ArrowDown className="text-primary h-4 w-4 animate-bounce" />
         Scroll to explore
       </div>
     </section>

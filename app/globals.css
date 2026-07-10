@@ -179,7 +179,8 @@
   .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
@@ -189,7 +190,8 @@
   }
 
   .grid-glow {
-    background-image: linear-gradient(
+    background-image:
+      linear-gradient(
         to right,
         color-mix(in oklch, var(--primary) 8%, transparent) 1px,
         transparent 1px
@@ -200,20 +202,34 @@
         transparent 1px
       );
     background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+    mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      black 40%,
+      transparent 100%
+    );
   }
 
   @keyframes float-blob {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(3%, 5%) scale(1.08); }
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(3%, 5%) scale(1.08);
+    }
   }
   .animate-float-blob {
     animation: float-blob 14s ease-in-out infinite;
   }
 
   @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 55%, transparent); }
-    50% { box-shadow: 0 0 0 6px color-mix(in oklch, var(--primary) 0%, transparent); }
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 55%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 6px color-mix(in oklch, var(--primary) 0%, transparent);
+    }
   }
   .animate-pulse-dot {
     animation: pulse-dot 2.4s ease-in-out infinite;

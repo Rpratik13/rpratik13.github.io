@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Download, Menu, X } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 import { profile } from '@/lib/portfolio-data';
 
@@ -14,16 +15,22 @@ const sections = [
   { id: 'skills', label: 'Skills' },
 ];
 
-export function SiteNav() {
+export function SiteNav(): React.ReactElement {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('about');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = (): void => {
+      return setScrolled(window.scrollY > 24);
+    };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return (): void => {
+      return window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -37,64 +44,76 @@ export function SiteNav() {
     );
     sections.forEach(({ id }) => {
       const el = document.getElementById(id);
-      if (el) observer.observe(el);
+
+      if (el) {
+        observer.observe(el);
+      }
     });
-    return () => observer.disconnect();
+
+    return (): void => {
+      return observer.disconnect();
+    };
   }, []);
 
   return (
     <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'border-b border-border bg-background/80 backdrop-blur-md'
-          : 'border-b border-transparent',
-      )}
+      className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', {
+        'border-b border-transparent': !scrolled,
+        'border-border bg-background/80 border-b backdrop-blur-md': scrolled,
+      })}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
         <a
-          href="#top"
           className="flex items-center gap-2 font-mono text-sm font-semibold"
+          href="#top"
         >
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
+          <span className="bg-primary text-primary-foreground grid h-8 w-8 place-items-center rounded-lg">
             PR
           </span>
+
           <span className="hidden sm:inline">{profile.name}</span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">
-          {sections.map(({ id, label }) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                className={cn(
-                  'rounded-lg px-3 py-2 text-sm transition-colors',
-                  active === id
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-foreground',
-                )}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
+          {sections.map(({ id, label }) => {
+            return (
+              <li key={id}>
+                <a
+                  className={cn(
+                    'rounded-lg px-3 py-2 text-sm transition-colors',
+                    active === id
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-foreground',
+                  )}
+                  href={`#${id}`}
+                >
+                  {label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-2">
           <a
-            href={profile.resumeUrl}
+            className="bg-primary text-primary-foreground hidden items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-transform hover:-translate-y-0.5 sm:inline-flex"
             download
-            className="hidden items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 sm:inline-flex"
+            href={profile.resumeUrl}
           >
             <Download className="h-4 w-4" />
             Resume
           </a>
+
           <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
             aria-expanded={open}
-            className="grid h-10 w-10 place-items-center rounded-lg border border-border text-foreground md:hidden"
+            aria-label="Toggle menu"
+            className="border-border text-foreground grid h-10 w-10 place-items-center rounded-lg border md:hidden"
+            onClick={() => {
+              return setOpen((v) => {
+                return !v;
+              });
+            }}
+            type="button"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -102,25 +121,32 @@ export function SiteNav() {
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-background/95 px-5 py-3 backdrop-blur-md md:hidden">
+        <div className="border-border bg-background/95 border-t px-5 py-3 backdrop-blur-md md:hidden">
           <ul className="flex flex-col">
-            {sections.map(({ id, label }) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
+            {sections.map(({ id, label }) => {
+              return (
+                <li key={id}>
+                  <a
+                    className="text-muted-foreground hover:bg-secondary hover:text-foreground block rounded-lg px-3 py-2.5 text-sm"
+                    href={`#${id}`}
+                    onClick={() => {
+                      return setOpen(false);
+                    }}
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+
             <li>
               <a
-                href={profile.resumeUrl}
+                className="bg-primary text-primary-foreground mt-1 flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium"
                 download
-                onClick={() => setOpen(false)}
-                className="mt-1 flex items-center gap-2 rounded-lg bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground"
+                href={profile.resumeUrl}
+                onClick={() => {
+                  return setOpen(false);
+                }}
               >
                 <Download className="h-4 w-4" />
                 Download Resume

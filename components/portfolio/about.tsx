@@ -1,36 +1,37 @@
-import { SectionHeading } from './section-heading';
 import { Reveal } from './reveal';
+import { SectionHeading } from './section-heading';
 
-export function About() {
+export function About(): React.ReactElement {
   return (
-    <section id="about" className="px-5 py-20 md:px-8 md:py-28">
+    <section className="px-5 py-20 md:px-8 md:py-28" id="about">
       <div className="mx-auto max-w-6xl">
         <SectionHeading index="00" subtitle="Who I am" title="About Me" />
 
         <div className="grid gap-10 md:grid-cols-5">
           <Reveal className="md:col-span-3">
-            <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
+            <div className="text-muted-foreground space-y-4 text-lg leading-relaxed">
               <p>
                 I am a full-stack software engineer with an M.S. in Computer
                 Science and{' '}
-                <span className="font-semibold text-foreground">5+ years</span>{' '}
+                <span className="text-foreground font-semibold">5+ years</span>{' '}
                 of experience designing systems that scale gracefully and
                 interfaces that feel effortless. I thrive at the seams where the
                 database, the API, and the UI meet specializing in scalable
                 application architecture, API integration, and high-performance
                 code development across Java, Node.js, .NET, and React.
               </p>
+
               <p>
                 My work spans{' '}
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   distributed backends
                 </span>
                 ,{' '}
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   real-time data pipelines
                 </span>
                 , and{' '}
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   type-safe frontends
                 </span>
                 . Beyond writing production-grade code, I have a proven record
@@ -48,15 +49,18 @@ export function About() {
                 'Distributed systems & databases',
                 'Clean, tested, maintainable code',
                 'Mentoring & technical leadership',
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3"
-                >
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
-                  <span className="text-foreground">{item}</span>
-                </li>
-              ))}
+              ].map((item) => {
+                return (
+                  <li
+                    className="border-border bg-card/60 flex items-center gap-3 rounded-xl border px-4 py-3"
+                    key={item}
+                  >
+                    <span className="bg-primary h-2 w-2 shrink-0 rounded-full" />
+
+                    <span className="text-foreground">{item}</span>
+                  </li>
+                );
+              })}
             </ul>
           </Reveal>
         </div>

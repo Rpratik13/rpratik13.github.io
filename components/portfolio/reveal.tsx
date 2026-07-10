@@ -1,54 +1,65 @@
-"use client"
+'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from "react"
-import { cn } from "@/lib/utils"
+import { type ReactNode, useEffect, useRef, useState } from 'react';
+
+import { cn } from '@/lib/utils';
 
 type RevealProps = {
-  children: ReactNode
-  className?: string
-  /** Delay in ms before the reveal animation starts once in view. */
-  delay?: number
-  as?: "div" | "li" | "section" | "article"
-}
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  as?: 'article' | 'div' | 'li' | 'section';
+};
 
-export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
-  const ref = useRef<HTMLElement | null>(null)
-  const [visible, setVisible] = useState(false)
+export function Reveal({
+  as = 'div',
+  children,
+  className,
+  delay = 0,
+}: RevealProps): React.ReactElement {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const node = ref.current
-    if (!node) return
+    const node = ref.current;
 
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true)
-      return
+    if (!node) return;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      // eslint-disable-next-line
+      setVisible(true);
+
+      return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisible(true)
-            observer.unobserve(entry.target)
+            setVisible(true);
+            observer.unobserve(entry.target);
           }
-        })
+        });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-    )
+      { rootMargin: '0px 0px -40px 0px', threshold: 0.15 },
+    );
 
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
+    observer.observe(node);
 
-  const Tag = as as "div"
+    return (): void => {
+      return observer.disconnect();
+    };
+  }, []);
+
+  const Tag = as as 'div';
 
   return (
     <Tag
+      className={cn('reveal', visible && 'is-visible', className)}
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={cn("reveal", visible && "is-visible", className)}
-      style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
+      style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}
     >
       {children}
     </Tag>
-  )
+  );
 }
